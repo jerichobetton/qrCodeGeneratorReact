@@ -21,11 +21,16 @@ import "./App.css";
 function App() {
   const [qrImgeSource, setQrImageSource] = useState("");
   const [showImage, setShowImage] = useState(false);
-  function generateQR(){
+  const [inputText, setInputText] = useState("")
+  function handleInputChange(e) {
+    setInputText(e.target.value)
+  }
+
+  function generateQR() {
     console.log("Just something.. Anything");
     setQrImageSource(
       "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
-        "random"
+      inputText
     );
     setShowImage(true);
   }
@@ -34,7 +39,7 @@ function App() {
     <>
       <div className="container">
         <p>Enter your text or URL</p>
-        <input type="text" placeholder="Text or Url" id="qrText" />
+        <input onChange={handleInputChange} type="text" placeholder="Text or Url" id="qrText" />
 
         <div className="show-img" id="imgBox">
           <img src={qrImgeSource} id="qrImage" />
